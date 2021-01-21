@@ -11,18 +11,31 @@ export class AppComponent implements OnInit {
 
   constructor(private http: HttpClient) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.fetchPosts();
+  }
 
   onCreatePost(postData: { title: string; content: string }) {
     // Send Http request
-    console.log(postData);
+    this.http.post('https://angular-udemy-course-f2b18-default-rtdb.firebaseio.com/posts.json', postData)
+      .subscribe(response => {
+        console.log(response);
+    });
   }
 
   onFetchPosts() {
     // Send Http request
+    this.fetchPosts();
   }
 
   onClearPosts() {
     // Send Http request
+  }
+
+  fetchPosts() {
+    this.http.get('https://angular-udemy-course-f2b18-default-rtdb.firebaseio.com/posts.json')
+      .subscribe(resp => {
+        console.log(resp);
+      });
   }
 }
