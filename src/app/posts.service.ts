@@ -30,4 +30,8 @@ export class PostService {
       return postsArray;
     }))
   }
+
+  deletePosts() {
+    return this.http.delete('https://angular-udemy-course-f2b18-default-rtdb.firebaseio.com/posts.json');
+  }
 }
