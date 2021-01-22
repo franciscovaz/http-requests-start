@@ -18,7 +18,7 @@ export class PostService {
   }
 
   fetchPosts() {
-    this.http.get<{[key: string] : Post}>('https://angular-udemy-course-f2b18-default-rtdb.firebaseio.com/posts.json')
+    return this.http.get<{[key: string] : Post}>('https://angular-udemy-course-f2b18-default-rtdb.firebaseio.com/posts.json')
     .pipe(
       map(responseData => {
       const postsArray: Post[] = [];
@@ -29,7 +29,5 @@ export class PostService {
       }
       return postsArray;
     }))
-    .subscribe(posts => {
-    });
   }
 }
