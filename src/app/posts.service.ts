@@ -61,7 +61,8 @@ export class PostService {
   deletePosts() {
     return this.http.delete('https://angular-udemy-course-f2b18-default-rtdb.firebaseio.com/posts.json',
     {
-      observe: 'events'
+      observe: 'events',
+      responseType: 'text'
     })
     .pipe(
       tap(event => {
