@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
-import { map } from "rxjs/operators";
+import { Subject, throwError } from "rxjs";
+import { catchError, map } from "rxjs/operators";
 import { Post } from "./post.model";
 
 @Injectable({ providedIn: 'root'})
@@ -35,7 +35,14 @@ export class PostService {
         }
       }
       return postsArray;
-    }))
+    }),
+    catchError(errorResp => {
+      // Podemos querer enviar info para o analytics por exemplo
+      // lancamos o erro para do outro lado o subscribe o apanhar
+      return throwError(errorResp);
+    })
+
+    )
   }
 
   deletePosts() {
